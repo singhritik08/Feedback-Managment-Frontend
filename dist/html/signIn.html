@@ -7,18 +7,19 @@
   <link rel="stylesheet" href="/dist/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+<!-- npx tailwindcss -i .\src\style.css -o .\dist\output.css --watch -->
 
-<body class="bg-gray-100">
   <!-- Navbar -->
   <nav class="bg-indigo-600 p-4">
     <div class="container mx-auto flex items-center justify-between">
-      <a href="#" class="text-white text-xl font-semibold">Feedback System</a>
+      <a href="#" class="text-white text-xl font-semibold">FeedBox</a>
       
       <div class="hidden md:flex space-x-6">
         <a href="#" class="text-white hover:text-gray-200">Home</a>
+        <a href="/dist/html/Course.html" class="text-white hover:text-gray-200">Courses</a>
         <a href="#" class="text-white hover:text-gray-200">About</a>
         <a href="#" class="text-white hover:text-gray-200">Contact</a>
-        <a href="#" class="text-white hover:text-gray-200">Login/SignUp</a>
+        <a href="/dist/html/signUp.html" class="text-white hover:text-gray-200">SignUp</a>
       </div>
       <button id="menu-btn" class="block md:hidden text-white focus:outline-none">
         <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
@@ -28,28 +29,29 @@
     <!-- for mobile view -->
     <div id="mobile-menu" class="hidden md:hidden bg-indigo-600 space-y-2 p-4">
       <a href="#" class="block text-white hover:text-gray-200">Home</a>
+      <a href="/dist/html/Course.html" class="text-white hover:text-gray-200">Courses</a>
       <a href="#" class="block text-white hover:text-gray-200">About</a>
       <a href="#" class="block text-white hover:text-gray-200">Contact</a>
-      <a href="#" class="block text-white hover:text-gray-200">Login/SignUp</a>
+      <a href="#" class="block text-white hover:text-gray-200">Login</a>
+      
     </div>
   </nav>
   <!-- Navbar Ends-->
-
-  <!-- Login -->
-  <div class="flex items-center justify-center h-screen ">
-    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+  <body class="bg-gradient-to-br from-blue-200 to-blue-300 font-sans antialiased">
+  <div class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-lg bg-white bg-opacity-90 p-8 rounded-xl shadow-2xl transform transition duration-200 hover:scale-105">
       <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Login to Your Account</h2>
       <form action="#" method="POST" class="space-y-6">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" id="email" name="email" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter your email">
+          <label for="phone" class="block text-sm  font-medium text-gray-700">Phone No.</label>
+          <input type="text" maxlength="10" id="phone" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm " placeholder="Enter your Phone No.">
         </div>
 
         <div class="relative">
           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" id="password" name="password" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter your password">
+          <input type="password" id="password" name="password" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm " placeholder="Enter your password">
           
-          <button type="button" onclick="togglePassword()" class="absolute top-11 right-3 flex items-center text-gray-500 hover:text-gray-700">
+          <button type="button" onclick="togglePassword()" class="absolute top-1/2 right-3 flex items-center text-gray-500 hover:text-gray-700">
             <span id="toggle-text"><i class="fa-regular fa-eye-slash"></i></span>
           </button>
         </div>
@@ -64,30 +66,11 @@
         </button>
       </form>
       <p class="text-center text-sm text-gray-600 mt-6">
-        Don’t have an account? <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold">Sign up</a>
+        Don’t have an account? <a href="./signUp.html" class="text-indigo-600 hover:text-indigo-800 font-semibold">Sign up</a>
       </p>
     </div>
   </div>
 
-  <script>
-    // Mobile Menu Toggle
-    document.getElementById('menu-btn').addEventListener('click', function () {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-
-    // Password Toggle
-    function togglePassword() {
-      const passwordField = document.getElementById('password');
-      const toggleText = document.getElementById('toggle-text');
-
-      if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        toggleText.innerHTML = '<i class="fa-regular fa-eye"></i>'; 
-      } else {
-        passwordField.type = 'password';
-        toggleText.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
-      }
-    }
-  </script>
+  <script src="/dist/js/SignIn.js"></script>
 </body>
 </html>
