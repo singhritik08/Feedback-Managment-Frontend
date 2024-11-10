@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const phoneInput = document.getElementById("phone");
   const toggleText = document.getElementById("toggle-text");
 
-  //password icon 
+  // Password icon toggle
   function togglePassword() {
     const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
     passwordInput.setAttribute("type", type);
@@ -23,35 +23,40 @@ document.addEventListener("DOMContentLoaded", function () {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault(); // Prevent the form from refreshing the page
 
-    const phone = phoneInput;
-    const password = passwordInput;
-
+    const phone = phoneInput.value.trim();
+    const password = passwordInput.value.trim();
+  
+    if (!phone || !password) {
+      alert("Please enter both phone number and password.");
+      return;
+    }
+  
     try {
       const response = await fetch('http://localhost:8080/api/user/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          phone: phone.value,
-          password: password.value,
-        }),
+        body: JSON.stringify({ phone, password }),
       });
+  
       if (response.ok) {
         const data = await response.json();
-
+  
         if (data && data.userId != null) {
           sessionStorage.setItem('userId', data.userId);
-
+          sessionStorage.setItem('user',JSON.stringify(data));
+  
           window.location.href = "/dist/html/Course.html";
         } else {
           alert("Error: Invalid login credentials. Please try again.");
         }
+      } else {
+        alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Network error:", error);
       alert("Network error. Please check your connection and try again.");
     }
-
   });
 });
