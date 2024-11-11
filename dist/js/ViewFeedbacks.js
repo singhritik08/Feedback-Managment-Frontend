@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function logout() {
     localStorage.removeItem('user');
     sessionStorage.clear();
-    window.location.href = '/dist/html/signIn.html';
+    window.location.href = '/dist/html/Index.html';
 }
 
 async function getFeedback() {
@@ -81,7 +81,7 @@ async function getFeedback() {
             return;
         }
 
-        const response = await fetch(`http://localhost:8080/api/feedback/get/feedback/by/student/id?userId=${userId}`);
+        const response = await fetch(`https://feedback-system-backend-8kgm.onrender.com/api/feedback/get/feedback/by/student/id?userId=${userId}`);
         const data = await response.json();
 
         if (data && Array.isArray(data) && data.length > 0) {
@@ -106,7 +106,7 @@ async function getFeedback() {
 
 async function getCourseName(courseId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/course/course/by/id?id=${courseId}`);
+        const response = await fetch(`https://feedback-system-backend-8kgm.onrender.com/api/course/course/by/id?id=${courseId}`);
         const courseData = await response.json();
         return courseData.courseName || "Course Name Not Available";
     } catch (error) {

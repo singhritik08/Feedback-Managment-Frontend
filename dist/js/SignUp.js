@@ -24,7 +24,7 @@ async function submitForm() {
   const password = document.getElementById("password").value;
 
   try {
-    const response = await fetch('http://localhost:8080/api/user/signup', {
+    const response = await fetch('https://feedback-system-backend-8kgm.onrender.com/api/user/signup', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -37,7 +37,7 @@ async function submitForm() {
 
       if (result.status === "100 CONTINUE") {
         alert("Signup successful!");
-        window.location.href = "/dist/html/signIn.html";
+        window.location.href = "/dist/html/Index.html";
       } else {
         const errorMessage = result.errorMessage || "Please try again.";
         alert("Signup failed: " + errorMessage);

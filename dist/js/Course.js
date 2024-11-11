@@ -72,14 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
 function logout() {``
     localStorage.removeItem('user');
     sessionStorage.clear(); 
-    window.location.href = '/dist/html/signIn.html';
+    window.location.href = '/dist/html/Index.html';
 }
 
 fetchCourses();
 // Fetch courses when the page loads
 async function fetchCourses() {
     try {
-        const response = await fetch('http://localhost:8080/api/course/get/all/Course');
+        const response = await fetch('https://feedback-system-backend-8kgm.onrender.com/api/course/get/all/Course');
         const courses = await response.json();
         const courseList = document.getElementById('courseList');
         courseList.innerHTML = '';
@@ -159,7 +159,7 @@ const courseRequest = {
     userId: userId
 };
 
-fetch("http://localhost:8080/api/course/create/course", {
+fetch("https://feedback-system-backend-8kgm.onrender.com/api/course/create/course", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"

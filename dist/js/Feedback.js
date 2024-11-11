@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // console.log(courseId);
 
     // Fetch course details from the API
-    fetch(`http://localhost:8080/api/course/course/by/id?id=${courseId}`)
+    fetch(`https://feedback-system-backend-8kgm.onrender.com/api/course/course/by/id?id=${courseId}`)
         .then(response => response.json())
         .then(data => {
             if (data) {
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         // Call API to submit feedback
-        fetch('http://localhost:8080/api/feedback/submit/feedback', {
+        fetch('https://feedback-system-backend-8kgm.onrender.com/api/feedback/submit/feedback', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function logout() {
     localStorage.removeItem('user');
     sessionStorage.clear(); 
-    window.location.href = '/dist/html/signIn.html';
+    window.location.href = '/dist/html/Index.html';
 }
 
 function setRating(value) {

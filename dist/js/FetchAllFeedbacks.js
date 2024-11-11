@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function logout() {``
     localStorage.removeItem('user');
     sessionStorage.clear(); 
-    window.location.href = '/dist/html/signIn.html';
+    window.location.href = '/dist/html/Index.html';
 }
         
         async function fetchFeedbacks() {
             try {
-                const response = await fetch('http://localhost:8080/api/feedback/get/all/feedback');
+                const response = await fetch('https://feedback-system-backend-8kgm.onrender.com/api/feedback/get/all/feedback');
                 const data = await response.json();
 
                 const feedbackList = document.getElementById('feedback-list');
@@ -87,12 +87,12 @@ function logout() {``
                 // Loop through the feedback data
                 for (const feedback of data) {
                     try {
-                        const courseResponse = await fetch(`http://localhost:8080/api/course/course/by/id?id=${feedback.courseId}`);
+                        const courseResponse = await fetch(`https://feedback-system-backend-8kgm.onrender.com/api/course/course/by/id?id=${feedback.courseId}`);
                         const courseData = await courseResponse.json();
                         const courseName = courseData.courseName || 'Course Name Not Available';
 
                     
-                        const userResponse = await fetch(`http://localhost:8080/api/user/get/username/by/UserId?userId=${feedback.userId}`);
+                        const userResponse = await fetch(`https://feedback-system-backend-8kgm.onrender.com/api/user/get/username/by/UserId?userId=${feedback.userId}`);
                         const userData = await userResponse.json();
                         console.log(userData)
                         const userName = userData.username || 'Unknown User';

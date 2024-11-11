@@ -75,7 +75,7 @@ function displayCourseFeedbacks() {
         document.getElementById('courseName').textContent = `Course Name: ${courseName}`;
     }
 
-    fetch(`http://localhost:8080/api/feedback/get/feedback/by/courseId?courseId=${courseId}`)
+    fetch(`https://feedback-system-backend-8kgm.onrender.com/api/feedback/get/feedback/by/courseId?courseId=${courseId}`)
         .then(response => response.json())
         .then(data => populateFeedbackList(data))
         .catch(error => console.error('Error fetching feedbacks:', error));
@@ -121,7 +121,7 @@ async function createFeedbackItem(feedback, feedbackList) {
 
 async function fetchUsername(userId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/user/get/username/by/UserId?userId=${userId}`);
+        const response = await fetch(`https://feedback-system-backend-8kgm.onrender.com/api/user/get/username/by/UserId?userId=${userId}`);
         const data = await response.json();
         return data.username || "Unknown User";
     } catch (error) {
@@ -138,7 +138,7 @@ function submitResponse(feedbackId, adminId) {
         return;
     }
 
-    const url = 'http://localhost:8080/api/feedback/respond/to/feedback';
+    const url = 'https://feedback-system-backend-8kgm.onrender.com/api/feedback/respond/to/feedback';
     fetch(url, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -174,7 +174,7 @@ function submitResponse(feedbackId, adminId) {
 }
 async function checkIfResponded(feedbackId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/feedback/get/if/responded?feedbackId=${feedbackId}`);
+        const response = await fetch(`https://feedback-system-backend-8kgm.onrender.com/api/feedback/get/if/responded?feedbackId=${feedbackId}`);
         const data = await response.json();
         return data.responded; 
     } catch (error) {
@@ -187,5 +187,5 @@ async function checkIfResponded(feedbackId) {
 
 function logout() {
     sessionStorage.clear();
-    window.location.href = '/dist/html/signIn.html';
+    window.location.href = '/dist/html/Index.html';
 }
