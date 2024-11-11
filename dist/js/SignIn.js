@@ -46,8 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data && data.userId != null) {
           sessionStorage.setItem('userId', data.userId);
           sessionStorage.setItem('user',JSON.stringify(data));
-  
-          window.location.href = "/dist/html/Course.html";
+
+          const user = JSON.parse(sessionStorage.getItem('user'));
+          console.log(user.role);
+          if(user.role == "admin"){
+            window.location.href = "/dist/html/AdminConsole/CourseAdmin.html";
+          }else{
+             window.location.href = "/dist/html/Course.html";
+          }
         } else {
           alert("Error: Invalid login credentials. Please try again.");
         }

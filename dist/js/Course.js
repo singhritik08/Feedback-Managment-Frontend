@@ -56,18 +56,20 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('userFullName').textContent = "Please, Login First! ";
         document.getElementById('userPhone').textContent = '';
         document.getElementById('userRole').textContent = '';
+        document.getElementById('previous-feedback').textContent = 'SignIn';
         document.getElementById('logout-button').textContent = '';
 
         document.getElementById('mobileUserFullName').textContent = "Please, Login First! ";
         document.getElementById('mobileUserPhone').textContent = '';
         document.getElementById('mobileUserRole').textContent = '';
+        document.getElementById('mobile-previous-feedback').textContent = '';
         document.getElementById('mobile-logout-button').textContent = '';
-    }
+       }
 
 });
 
 // Logout function
-function logout() {
+function logout() {``
     localStorage.removeItem('user');
     sessionStorage.clear(); 
     window.location.href = '/dist/html/signIn.html';
@@ -109,6 +111,7 @@ function showCourseDetails(courseName, description, instructor, courseId) {
     document.getElementById('actionButtons').classList.remove('hidden');
     selectedCourseId = courseId;
     sessionStorage.setItem('selectedCourseId', courseId);
+    sessionStorage.setItem('courseName',courseName);
 }
 
 function openFeedbackPage() {
@@ -117,4 +120,78 @@ function openFeedbackPage() {
     } else {
         alert("Please select a course to give feedback.");
     }
+}
+
+
+function openForm() {
+    document.getElementById("courseForm").classList.remove("hidden");
+}
+
+function closeForm() {
+    document.getElementById("courseForm").classList.add("hidden");
+}
+
+
+function addCourse(event) {
+event.preventDefault();
+
+// Get the values from the form fields
+const courseName = document.getElementById("newCourseName").value;
+const instructor = document.getElementById("newInstructor").value;
+const description = document.getElementById("newCourseDescription").value;
+
+// Retrieve userId from sessionStorage
+const userId = sessionStorage.getItem('userId');
+
+if (!userId) {
+    alert("User not logged in!");
+    return;
+}
+
+
+
+
+// For Admin Page to add Course
+const courseRequest = {
+    courseName: courseName,
+    instructor: instructor,
+    description: description,
+    userId: userId
+};
+
+fetch("http://localhost:8080/api/course/create/course", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(courseRequest)
+})
+.then(response => {
+    if (response.ok) {
+        
+        alert("Course added successfully!");
+        closeForm();
+        fetchCourses();
+    } else {
+        return response.json().then(data => {
+            alert(data.message || "An error occurred.");
+        });
+    }
+})
+.catch(error => {
+    console.error("Error:", error);
+    alert("Failed to add course.");
+});
+}
+function openFeedbackResponsePage() {
+    if (selectedCourseId) {
+        sessionStorage.setItem('selectedCourseId',selectedCourseId);
+        window.location.href = `/dist/html/AdminConsole/RespondFeedback.html?courseId=${selectedCourseId}`;
+    } else {
+        alert("Please select a course to give feedback.");
+    }
+}
+
+function showFeedbacks() {``
+    window.location.href = '/dist/html/AdminConsole/FetchAllFeedbacks.html';
 }
