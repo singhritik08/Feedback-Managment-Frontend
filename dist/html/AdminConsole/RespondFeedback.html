@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respond Feedbacks</title>
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .loader {
+            width: 70px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            justify-content: center;
+            border: 8px solid #0000;
+            border-right-color: #0d4fa097;
+            position: relative;
+            animation: l24 1s infinite linear;
+        }
+        .loader:before,
+        .loader:after {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: inherit;
+            animation: inherit;
+            animation-duration: 2s;
+        }
+        .loader:after {
+            animation-duration: 4s;
+        }
+        @keyframes l24 {
+            100% {
+                transform: rotate(1turn);
+            }
+        }
+    
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .loader {
+                width: 50px;
+                border: 6px solid #0000;
+                border-right-color: #0d4fa097;
+            }
+            .loader:before,
+            .loader:after {
+                inset: -6px;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .loader {
+                width: 40px;
+                border: 4px solid #0000;
+                border-right-color: #0d4fa097;
+            }
+            .loader:before,
+            .loader:after {
+                inset: -4px;
+            }
+        }
+    </style>
+    
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-600 p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <img src="/dist/Images/feedbox-logo.png" alt="FeedBox Logo" class="w-12 h-10">
+                <a href="#" class="text-white text-xl font-semibold">FeedBox</a>
+            </div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <!-- <a href="#" class="text-white hover:text-gray-200">Home</a>
+                <a href="/dist/html/Course.html" class="text-white hover:text-gray-200">Courses</a>
+                <a href="#" class="text-white hover:text-gray-200">About</a>
+                <a href="#" class="text-white hover:text-gray-200">Contact Us</a> -->
+                <div class="relative">
+                    <a href="#" id="profile" class="text-white flex items-center space-x-2 focus:outline-none hover:text-gray-200"
+                        onclick="toggleProfileMenu()">
+                        <i class="fas fa-user-circle text-xl"></i>
+                        <span id="userName">Profile</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </a>
+                    <div id="profile-card" class="hidden absolute right-0 mt-2 w-auto bg-white rounded-lg shadow-lg p-4 text-gray-800">
+                        <p id="userFullName" class="text-lg font-semibold">Test</p>
+                        <p id="userPhone" class="text-sm text-gray-500 mb-4">0000000000</p>
+                        <p id="userRole" class="text-sm text-gray-500 mb-4">Role: Admin</p>
+                        <div id="previous-feedback" class="border-t border-gray-300 pt-4">
+                            <a href="#" onclick=" " class="text-blue-400 font-semibold hover:text-blue-800">Get all Feedbacks</a>
+                        </div>
+                        <div id="logout-button" class="border-t border-gray-300 pt-4">
+                            <a href="#" onclick="logout()" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden bg-indigo-600 space-y-2 p-4 md:hidden">
+            <a href="#" class="block text-white hover:text-gray-200">Home</a>
+            <a href="/dist/html/CourseAdmin.html" class="block text-white hover:text-gray-200">Courses</a>
+            <a href="#" class="block text-white hover:text-gray-200">About</a>
+            <a href="#" class="block text-white hover:text-gray-200">Contact</a>
+            <div class="relative">
+                <a href="#" id="mobile-profile" class="text-white flex items-center space-x-2 focus:outline-none hover:text-gray-200"
+                    onclick="toggleMobileProfileMenu()">
+                    <i class="fas fa-user-circle text-xl"></i>
+                    <span id="mobileUserName">Profile</span>
+                    <i class="fas fa-chevron-down text-sm"></i>
+                </a>
+                <div id="mobile-profile-card" class="hidden absolute right-0 mt-2 w-auto bg-white rounded-lg shadow-lg p-4 text-gray-800">
+                    <p id="mobileUserFullName" class="text-lg font-semibold">Test</p>
+                    <p id="mobileUserPhone" class="text-sm text-gray-500 mb-4">0000000000</p>
+                    <p id="mobileUserRole" class="text-sm text-gray-500 mb-4">Role: Admin</p>
+                    <div id="mobile-previous-feedback" class="border-t border-gray-300 pt-4">
+                        <a href="#" onclick=" " class="text-blue-600 font-semibold hover:text-blue-800">Get all Feedbacks</a>
+                    </div>
+                    <div id="mobile-logout-button" class="border-t border-gray-300 pt-4">
+                        <a href="#" onclick="logout()" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold text-center mb-4 text-blue-700" id="courseName">Displaying Feedbacks For Course : Loading...</h1>
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Students Feedbacks</h2>
+        
+        <div id="feedbackList" class="space-y-4">
+            <div class="loader hidden" id="loader"></div> 
+        </div>
+    </div>
+
+</body>
+
+<script src="/dist/js/RespondFeedback.js"></script>
+
+</html>

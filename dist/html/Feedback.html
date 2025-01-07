@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Feedback</title>
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-blue-100 font-sans antialiased">
+
+<!-- Navbar -->
+<nav class="bg-indigo-600 p-4">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+            <img src="/dist/Images/feedbox-logo.png" alt="FeedBox Logo" class="w-12 h-10">
+            <a href="#" class="text-white text-xl font-semibold">FeedBox</a>
+        </div>
+        <div class="hidden md:flex space-x-6 items-center">
+            <!-- <a href="#" class="text-white hover:text-gray-200">Home</a>
+            <a href="/dist/html/Course.html" class="text-white hover:text-gray-200">Courses</a>
+            <a href="#" class="text-white hover:text-gray-200">About</a>
+            <a href="#" class="text-white hover:text-gray-200">Contact Us</a> -->
+            <div class="relative">
+                <a href="#" id="profile" class="text-white flex items-center space-x-2 focus:outline-none hover:text-gray-200">
+                    <i class="fas fa-user-circle text-xl"></i>
+                    <span id="userName">Profile</span>
+                    <i class="fas fa-chevron-down text-sm"></i>
+                </a>
+                <!-- Profile Card -->
+                <div id="profile-card" class="hidden absolute right-0 mt-2 w-70 bg-white rounded-lg shadow-lg p-4 text-gray-800">
+                    <p id="userFullName" class="text-lg font-semibold">Test</p>
+                    <p id="userPhone" class="text-sm text-gray-500 mb-4">0000000000</p>
+                    <p id="userRole" class="text-sm text-gray-500 mb-4">Role: Admin</p>
+                    <div id="logout-button" class="border-t border-gray-300 pt-4">
+                        <a href="#" onclick="logout()" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-indigo-600 space-y-2 p-4">
+        <a href="#" class="block text-white hover:text-gray-200">Home</a>
+        <a href="/dist/html/Course.html" class="block text-white hover:text-gray-200">Courses</a>
+        <a href="#" class="block text-white hover:text-gray-200">About</a>
+        <a href="#" class="block text-white hover:text-gray-200">Contact</a>
+        <div class="relative">
+            <a href="#" id="mobile-profile" class="text-white flex items-center space-x-2 focus:outline-none hover:text-gray-200">
+                <i class="fas fa-user-circle text-xl"></i>
+                <span id="mobileUserName">Profile</span>
+                <i class="fas fa-chevron-down text-sm"></i>
+            </a>
+            <div id="mobile-profile-card" class="hidden absolute right-0 mt-2 w-70 bg-white rounded-lg shadow-lg p-4 text-gray-800">
+                <p id="mobileUserFullName" class="text-lg font-semibold">Test</p>
+                <p id="mobileUserPhone" class="text-sm text-gray-500 mb-4">0000000000</p>
+                <p id="mobileUserRole" class="text-sm text-gray-500 mb-4">Role: Admin</p>
+                <div id="mobile-logout-button" class="border-t border-gray-300 pt-4">
+                    <a href="#" onclick="logout()" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Navbar Ends-->
+
+
+    <div class="container mx-auto p-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-blue-700">Course Feedback</h1>
+            <p class="text-blue-600 mt-2 text-lg">Please share your thoughts on the course!</p>
+        </div>
+
+        <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg border-t-4 border-blue-500">
+            <form action="#" method="POST">
+                <!-- Course Selection -->
+                <div class="mb-6">
+                    <label for="courseSelect" class="block text-xl font-semibold text-blue-700 mb-2">Course Name</label>
+                    <input id="courseSelect" name="courseName"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Your Course Name" disabled >
+                </div>
+
+                <!-- Instructor Name -->
+                <div class="mb-6">
+                    <label for="instructorName" class="block text-xl font-semibold text-blue-700 mb-2">Instructor Name</label>
+                    <input id="instructorName" name="instructorName"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Your Instructor Name" disabled >
+                </div>
+
+                <!-- Rating Section -->
+                <div class="mb-6">
+                    <label for="rating" class="block text-xl font-semibold text-blue-700 mb-2">Rate the Course</label>
+                    <div class="flex items-center space-x-2">
+                        <button type="button" class="text-yellow-500 text-5xl" onclick="setRating(1)">★</button>
+                        <button type="button" class="text-yellow-500 text-5xl" onclick="setRating(2)">★</button>
+                        <button type="button" class="text-yellow-500 text-5xl" onclick="setRating(3)">★</button>
+                        <button type="button" class="text-yellow-500 text-5xl" onclick="setRating(4)">★</button>
+                        <button type="button" class="text-yellow-500 text-5xl" onclick="setRating(5)">★</button>
+                    </div>
+                    <p id="ratingText" class="text-blue-600 mt-2">Select a rating</p>
+                    <input type="hidden" id="rating" name="rating" value="0">
+                </div>
+
+                <!-- Comments Section -->
+                <div class="mb-6">
+                    <label for="comments" class="block text-xl font-semibold text-blue-700 mb-2">Comments</label>
+                    <textarea id="comments" name="comments" rows="4"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                        placeholder="Share your feedback..."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-300">
+                    Submit Feedback
+                </button>
+            </form>
+        </div>
+    </div>
+    
+
+    <script src="/dist/js/Feedback.js"></script>
+</body>
+
+</html>

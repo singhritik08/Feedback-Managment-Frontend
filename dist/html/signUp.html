@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Feedback System</title>
+  <link rel="stylesheet" href="/dist/output.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    .loader {
+      width: 30px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 8px solid #0000;
+      border-right-color: #f7f7f697;
+      position: relative;
+      animation: l24 1s infinite linear;
+    }
+    .loader:before,
+    .loader:after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: inherit;
+      animation: inherit;
+      animation-duration: 2s;
+    }
+    .loader:after {
+      animation-duration: 4s;
+    }
+    @keyframes l24 {
+      100% {transform: rotate(1turn)}
+    }
+      </style>
+</head>
+<body class="bg-gradient-to-br from-blue-200 to-blue-300 font-sans antialiased">
+
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 p-4">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+            <img src="/dist/Images/feedbox-logo.png" alt="FeedBox Logo" class="w-12 h-10">
+            <a href="#" class="text-white text-xl font-semibold">FeedBox</a>
+        </div>
+
+        <div class="hidden md:flex space-x-6 items-center">
+            <!-- <a href="#" class="text-white hover:text-gray-200">Home</a>
+            <a href="/dist/html/Course.html" class="text-white hover:text-gray-200">Courses</a>
+            <a href="#" class="text-white hover:text-gray-200">About</a>
+            <a href="#" class="text-white hover:text-gray-200">Contact Us</a>
+            <a href="#" class="text-white hover:text-gray-200">SignIn</a> -->
+
+            
+        </div>
+
+        <button id="menu-btn" class="block md:hidden text-white focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile View-->
+    <div id="mobile-menu" class="hidden bg-indigo-600 space-y-2 p-4">
+        <!-- <a href="#" class="block text-white hover:text-gray-200">Home</a>
+        <a href="/dist/html/Course.html" class="block text-white hover:text-gray-200">Courses</a>
+        <a href="#" class="block text-white hover:text-gray-200">About</a>
+        <a href="#" class="block text-white hover:text-gray-200">Contact</a>
+        <a href="#" class="block text-white hover:text-gray-200">SignIn</a> -->
+
+      
+    </div>
+</nav>
+<!-- Navbar Ends-->
+
+  <!-- Signup Form -->
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg bg-white bg-opacity-90 p-8 rounded-xl shadow-2xl transform transition duration-200 hover:scale-105">
+      <h2 class="text-3xl font-bold text-center mb-6 text-indigo-700">Create a Free Account</h2>
+      <p class="text-center text-gray-600 mb-6">Join us and start sharing your feedback today!</p>
+      <form id="signup-form" class="space-y-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 shadow-md" placeholder="Enter your Full Name">
+        </div>
+        <div>
+          <label for="phone" class="block text-sm  font-medium text-gray-700 ">Phone No.</label>
+          <input type="text" maxlength="10" id="phone" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm " placeholder="Enter your Phone No." oninput="validatePhoneNumber()" >
+        </div>
+        <div>
+          <span class="text-gray-700 font-medium">Role:</span>
+          <label for="admin" class="inline-flex items-center ml-4">
+            <input type="radio" id="admin" name="role" value="admin" checked class="text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-gray-600">Admin</span>
+          </label>
+          <label for="student" class="inline-flex items-center ml-4">
+            <input type="radio" id="student" name="role" value="student" class="text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-gray-600">Student</span>
+          </label>
+        </div>
+        <div class="relative">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 shadow-md" placeholder="Enter your password">
+          <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-indigo-600">
+            <span id="toggle-text"><i class="fa-regular fa-eye-slash"></i></span>
+          </button>
+        </div>
+        <button type="button" onclick="submitForm()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+          <div class="loader hidden" id="loader"></div> 
+          Sign Up
+        </button>
+      </form>
+      <p class="text-center text-sm text-gray-600 mt-6">
+        Already have an account? <a href="/Index.html" class="text-indigo-600 hover:text-indigo-800 font-semibold">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="/dist/js/SignUp.js"></script>
+
+</body>
+</html>
